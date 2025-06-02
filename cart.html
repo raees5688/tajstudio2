@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - Taj Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Modern CSS Variables */
+    :root {
+      --primary: #2a2a2a;
+      --secondary: #f8f8f8;
+      --accent: #e8c07d;
+      --arrival-primary: #8a6e8f;
+      --arrival-accent: #ff9e6d;
+      --text: #333;
+      --light-text: #777;
+      --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+      --section-padding: 5rem 0;
+      --success: #2ed573;
+      --error: #e74c3c;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: #f9f9f9;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* Modern Header */
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1.5rem 5%;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--arrival-primary);
+    }
+
+    /* Modern Navigation */
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--arrival-primary);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Cart Header */
+    .cart-header {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .cart-header h1 {
+      font-size: 2.5rem;
+      color: var(--arrival-primary);
+      margin-bottom: 1rem;
+    }
+
+    .cart-header p {
+      color: var(--light-text);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cart Container */
+    .cart-container {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 3rem;
+      padding: 2rem 0 5rem;
+    }
+
+    /* Cart Items */
+    .cart-items {
+      background: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .cart-items-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-items-header h2 {
+      font-size: 1.4rem;
+      color: var(--arrival-primary);
+    }
+
+    .clear-cart-btn {
+      background: transparent;
+      border: none;
+      color: var(--error);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .clear-cart-btn:hover {
+      color: #c0392b;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-image {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .item-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-color, .item-size {
+      color: var(--light-text);
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .item-price {
+      color: var(--arrival-primary);
+      font-weight: 700;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .remove-item {
+      background: transparent;
+      border: none;
+      color: var(--light-text);
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .remove-item:hover {
+      color: var(--error);
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--secondary);
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quantity-btn:hover {
+      background: var(--arrival-primary);
+      color: white;
+      border-color: var(--arrival-primary);
+    }
+
+    .quantity-input {
+      width: 50px;
+      text-align: center;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+    }
+
+    /* Order Summary */
+    .order-summary {
+      background: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 120px;
+      height: fit-content;
+    }
+
+    .order-summary h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--secondary);
+      color: var(--arrival-primary);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .summary-row.final {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .promo-code {
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .promo-code input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .apply-btn {
+      background: var(--arrival-accent);
+      color: white;
+      border: none;
+      padding: 0 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .apply-btn:hover {
+      background: var(--arrival-primary);
+    }
+
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .continue-shopping {
+      text-align: center;
+      color: var(--arrival-primary);
+      font-weight: 500;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    .buy-now-btn {
+      width: 100%;
+      background: var(--arrival-primary);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .buy-now-btn:hover {
+      background: var(--arrival-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Empty Cart */
+    .empty-cart {
+      text-align: center;
+      padding: 4rem 0;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .empty-cart i {
+      font-size: 5rem;
+      color: var(--light-text);
+      margin-bottom: 1.5rem;
+      opacity: 0.3;
+    }
+
+    .empty-cart h2 {
+      font-size: 1.8rem;
+      color: var(--arrival-primary);
+      margin-bottom: 1rem;
+    }
+
+    .empty-cart p {
+      color: var(--light-text);
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .shop-btn {
+      background: var(--arrival-primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 2.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .shop-btn:hover {
+      background: var(--arrival-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--arrival-primary);
+      color: white;
+      padding: 4rem 5%;
+      margin-top: 5rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span {
+      color: var(--arrival-accent);
+    }
+
+    .footer-about p {
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--arrival-accent);
+      color: var(--primary);
+    }
+
+    .footer-links h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-links h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--arrival-accent);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      opacity: 0.8;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      color: var(--arrival-accent);
+      padding-left: 5px;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .cart-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .order-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .cart-item {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 1rem;
+      }
+      
+      .item-image {
+        width: 100%;
+        height: 200px;
+      }
+      
+      .item-actions {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cart-items, .order-summary {
+        padding: 1.5rem;
+      }
+      
+      .quantity-controls {
+        gap: 0.3rem;
+      }
+      
+      .quantity-btn {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Header -->
+  <header>
+    <div class="header-container container">
+      <div class="logo">Taj<span>Studio</span></div>
+      <nav>
+        <ul>
+          <li><a href="home-page.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="men.html">Men</a></li>
+          <li><a href="women.html">Women</a></li>
+          <li><a href="kids.html">Kids</a></li>
+          <li><a href="new-arrivals.html">New Arrivals</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cart Header -->
+  <div class="container">
+    <div class="cart-header">
+      <h1>Your Shopping Cart</h1>
+      <p>Review your items before proceeding to checkout</p>
+    </div>
+    
+    <!-- Cart Container -->
+    <div class="cart-container">
+      <!-- Cart Items -->
+      <div class="cart-items">
+        <div class="cart-items-header">
+          <h2>3 Items in your cart</h2>
+          <button class="clear-cart-btn" id="clear-cart">
+            <i class="fas fa-trash-alt"></i> Clear Cart
+          </button>
+        </div>
+        
+        <div class="cart-item" data-id="1">
+          <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+               alt="Urban Jacket" class="item-image">
+          <div class="item-details">
+            <div>
+              <div class="item-name">Urban Jacket</div>
+              <div class="item-color">Color: Navy Blue</div>
+              <div class="item-size">Size: Medium</div>
+            </div>
+            <div class="item-price">Rs 15,999</div>
+          </div>
+          <div class="item-actions">
+            <button class="remove-item">
+              <i class="fas fa-times"></i>
+            </button>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1">
+              <button class="quantity-btn plus">+</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cart-item" data-id="2">
+          <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+               alt="Designer Sneakers" class="item-image">
+          <div class="item-details">
+            <div>
+              <div class="item-name">Designer Sneakers</div>
+              <div class="item-color">Color: White</div>
+              <div class="item-size">Size: 9</div>
+            </div>
+            <div class="item-price">Rs 12,499</div>
+          </div>
+          <div class="item-actions">
+            <button class="remove-item">
+              <i class="fas fa-times"></i>
+            </button>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="1" min="1">
+              <button class="quantity-btn plus">+</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cart-item" data-id="3">
+          <img src="https://images.unsplash.com/photo-1529903384028-929ae5dccdf3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+               alt="Cashmere Sweater" class="item-image">
+          <div class="item-details">
+            <div>
+              <div class="item-name">Cashmere Sweater</div>
+              <div class="item-color">Color: Beige</div>
+              <div class="item-size">Size: Large</div>
+            </div>
+            <div class="item-price">Rs 8,999</div>
+          </div>
+          <div class="item-actions">
+            <button class="remove-item">
+              <i class="fas fa-times"></i>
+            </button>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus">-</button>
+              <input type="number" class="quantity-input" value="2" min="1">
+              <button class="quantity-btn plus">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>Rs 45,496</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Rs 500</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax</span>
+          <span>Rs 2,275</span>
+        </div>
+        <div class="summary-row">
+          <span>Discount</span>
+          <span>- Rs 0</span>
+        </div>
+        <div class="summary-row final">
+          <span>Total</span>
+          <span>Rs 48,271</span>
+        </div>
+        
+        <div class="promo-code">
+          <input type="text" placeholder="Enter promo code">
+          <button class="apply-btn">Apply</button>
+        </div>
+        
+        <div class="cart-actions">
+          <button class="buy-now-btn" id="buy-now">
+            <i class="fas fa-lock"></i> Proceed to Checkout
+          </button>
+          <a href="new-arrivals.html" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-about">
+          <div class="footer-logo">Taj<span>Studio</span></div>
+          <p>Creating joyful fashion that blends comfort, style and imagination since 2010.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Collections</h3>
+          <ul>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Men's Collection</a></li>
+            <li><a href="#">Women's Collection</a></li>
+            <li><a href="#">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion St, Karachi, Pakistan</li>
+            <li><i class="fas fa-phone"></i> +92 318 8958825</li>
+            <li><i class="fas fa-envelope"></i> info@tajstudio.com</li>
+            <li><i class="fas fa-clock"></i> Mon-Sat: 10AM - 8PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 Taj Studio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Cart functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all cart items
+      const cartItems = document.querySelectorAll('.cart-item');
+      const clearCartBtn = document.getElementById('clear-cart');
+      const buyNowBtn = document.getElementById('buy-now');
+      
+      // Update cart count in header
+      function updateCartCount() {
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+          cartCount.textContent = cartItems.length;
+        }
+      }
+      
+      // Remove item from cart
+      function removeItem(item) {
+        item.remove();
+        updateCartCount();
+        showEmptyCartIfNeeded();
+        updateTotals();
+      }
+      
+      // Show empty cart message if cart is empty
+      function showEmptyCartIfNeeded() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        if (document.querySelectorAll('.cart-item').length === 0) {
+          cartItemsContainer.innerHTML = `
+            <div class="empty-cart">
+              <i class="fas fa-shopping-cart"></i>
+              <h2>Your cart is empty</h2>
+              <p>Looks like you haven't added anything to your cart yet. Explore our collection and find something special!</p>
+              <button class="shop-btn" onclick="window.location.href='new-arrivals.html'">Continue Shopping</button>
+            </div>
+          `;
+        }
+      }
+      
+      // Update totals based on items and quantities
+      function updateTotals() {
+        let subtotal = 0;
+        
+        cartItems.forEach(item => {
+          const priceText = item.querySelector('.item-price').textContent;
+          const price = parseFloat(priceText.replace('Rs ', '').replace(',', ''));
+          const quantity = parseInt(item.querySelector('.quantity-input').value);
+          subtotal += price * quantity;
+        });
+        
+        // Calculate shipping and tax
+        const shipping = 500;
+        const taxRate = 0.05; // 5% tax
+        const tax = subtotal * taxRate;
+        const total = subtotal + shipping + tax;
+        
+        // Format numbers with commas
+        const formatNumber = num => 'Rs ' + num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        
+        // Update DOM
+        document.querySelector('.summary-row:nth-child(1) span:last-child').textContent = formatNumber(subtotal);
+        document.querySelector('.summary-row:nth-child(2) span:last-child').textContent = formatNumber(shipping);
+        document.querySelector('.summary-row:nth-child(3) span:last-child').textContent = formatNumber(tax);
+        document.querySelector('.summary-row.final span:last-child').textContent = formatNumber(total);
+        
+        // Update cart header count
+        const itemCount = document.querySelectorAll('.cart-item').length;
+        document.querySelector('.cart-items-header h2').textContent = `${itemCount} Item${itemCount !== 1 ? 's' : ''} in your cart`;
+      }
+      
+      // Set up event listeners for each cart item
+      cartItems.forEach(item => {
+        // Remove button
+        const removeBtn = item.querySelector('.remove-item');
+        removeBtn.addEventListener('click', () => removeItem(item));
+        
+        // Quantity controls
+        const minusBtn = item.querySelector('.minus');
+        const plusBtn = item.querySelector('.plus');
+        const quantityInput = item.querySelector('.quantity-input');
+        
+        minusBtn.addEventListener('click', () => {
+          const currentValue = parseInt(quantityInput.value);
+          if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+            updateTotals();
+          }
+        });
+        
+        plusBtn.addEventListener('click', () => {
+          quantityInput.value = parseInt(quantityInput.value) + 1;
+          updateTotals();
+        });
+        
+        quantityInput.addEventListener('change', () => {
+          if (quantityInput.value < 1) quantityInput.value = 1;
+          updateTotals();
+        });
+      });
+      
+      // Clear cart button
+      clearCartBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear your cart?')) {
+          cartItems.forEach(item => item.remove());
+          showEmptyCartIfNeeded();
+          updateCartCount();
+        }
+      });
+      
+      // Buy now button
+      buyNowBtn.addEventListener('click', () => {
+        // Redirect to checkout page
+        window.location.href = 'checkout.html';
+      });
+      
+      // Initialize totals
+      updateTotals();
+    });
+  </script>
+</body>
+</html>

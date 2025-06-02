@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taj Studio - About Us</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Additional styles specific to about page */
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .about-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .about-image img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .mission-vision {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .mission, .vision {
+      flex: 1;
+      min-width: 300px;
+      padding: 25px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .team-section {
+      margin-top: 60px;
+    }
+    
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .team-member {
+      width: 200px;
+      text-align: center;
+    }
+    
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #f1f1f1;
+    }
+    
+    .values-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .value-item {
+      flex: 1;
+      min-width: 200px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .value-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Taj Studio</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="men.html">Men</a></li>
+        <li><a href="women.html">Women</a></li>
+        <li><a href="kids.html">Kids</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="about-container">
+    <section id="about">
+      <div class="about-header">
+        <h2>Our Story</h2>
+        <p>Discover the essence of Taj Studio</p>
+      </div>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Who We Are</h3>
+          <p>Taj Studio is a premium fashion destination that blends traditional Pakistani elegance with contemporary style. Founded in 2015, we've grown from a small boutique to one of Pakistan's most beloved clothing brands.</p>
+          
+          <p>Our journey began with a simple vision: to create clothing that celebrates Pakistani heritage while meeting the demands of modern fashion. Today, we serve thousands of satisfied customers across the country with our unique collections for men, women, and children.</p>
+          
+          <div class="mission-vision">
+            <div class="mission">
+              <h4>Our Mission</h4>
+              <p>To provide high-quality, stylish clothing that combines cultural richness with modern design, making our customers look and feel their best.</p>
+            </div>
+            
+            <div class="vision">
+              <h4>Our Vision</h4>
+              <p>To become Pakistan's most trusted fashion brand, recognized for our commitment to quality, innovation, and customer satisfaction.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-image">
+          <img src="about-image.jpg" alt="Taj Studio Team">
+        </div>
+      </div>
+      
+      <div class="values-section">
+        <h3>Our Core Values</h3>
+        <div class="values-list">
+          <div class="value-item">
+            <div class="value-icon">🌟</div>
+            <h4>Quality</h4>
+            <p>We use only the finest fabrics and materials in all our products.</p>
+          </div>
+          
+          <div class="value-item">
+            <div class="value-icon">❤️</div>
+            <h4>Authenticity</h4>
+            <p>We stay true to our Pakistani roots while embracing global trends.</p>
+          </div>
+          
+          <div class="value-item">
+            <div class="value-icon">✨</div>
+            <h4>Innovation</h4>
+            <p>We constantly evolve to bring you fresh, modern designs.</p>
+          </div>
+          
+          <div class="value-item">
+            <div class="value-icon">🤝</div>
+            <h4>Customer Care</h4>
+            <p>Your satisfaction is our top priority.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="team-section">
+        <h3>Meet Our Founders</h3>
+        <div class="team-members">
+          <div class="team-member">
+            <img src="founder1.jpg" alt="Founder 1">
+            <h4>Ali Khan</h4>
+            <p>Creative Director</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="founder2.jpg" alt="Founder 2">
+            <h4>Fatima Ahmed</h4>
+            <p>Head Designer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Taj Studio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Cart functionality (consistent with your index page)
+    let cart = [];
+    
+    function viewCart() {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      
+      let summary = 'Your Cart:\n';
+      cart.forEach((item, index) => {
+        summary += `${index + 1}. ${item.name} - $${item.price}\n`;
+      });
+      
+      alert(summary);
+    }
+  </script>
+</body>
+</html>

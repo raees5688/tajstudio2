@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Collection - Taj Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Modern CSS Variables */
+    :root {
+      --primary: #2a2a2a;
+      --secondary: #f8f8f8;
+      --accent: #e8c07d;
+      --text: #333;
+      --light-text: #777;
+      --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+      --section-padding: 5rem 0;
+      --kids-primary: #5a9b8e;
+      --kids-accent: #ff9e6d;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* Modern Header */
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1.5rem 5%;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--kids-primary);
+    }
+
+    /* Modern Navigation */
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--kids-primary);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .kids-hero {
+      height: 60vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                  url('https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .kids-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .kids-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .kids-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--kids-primary);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      background-color: var(--kids-accent);
+    }
+
+    /* Section Titles */
+    .section-title {
+      text-align: center;
+      margin: 4rem 0 3rem;
+      font-size: 2.2rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: var(--kids-primary);
+      margin: 1rem auto;
+    }
+
+    /* Categories Filter */
+    .categories-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem 0 3rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 2px solid var(--kids-primary);
+      color: var(--kids-primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--kids-primary);
+      color: white;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: #ff4757;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    .product-image {
+      height: 350px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: var(--kids-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: var(--light-text);
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .add-to-cart {
+      background-color: var(--kids-primary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .add-to-cart:hover {
+      background-color: var(--kids-accent);
+      color: var(--primary);
+    }
+
+    .wishlist {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--light-text);
+      transition: var(--transition);
+    }
+
+    .wishlist:hover {
+      color: #ff4757;
+    }
+
+    /* Featured Collection */
+    .featured-collection {
+      background-color: #f5f9f8;
+      padding: var(--section-padding);
+      margin: 5rem 0;
+    }
+
+    .collection-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .collection-image {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 500px;
+    }
+
+    .collection-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .collection-details h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      color: var(--kids-primary);
+    }
+
+    .collection-details h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: var(--kids-accent);
+    }
+
+    .collection-details p {
+      margin-bottom: 1.5rem;
+      color: var(--light-text);
+    }
+
+    /* Cart Icon */
+    .cart-icon {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      background-color: var(--kids-primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .cart-icon:hover {
+      background-color: var(--kids-accent);
+      color: var(--primary);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #ff4757;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--kids-primary);
+      color: white;
+      padding: 4rem 5%;
+      margin-top: 5rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span {
+      color: var(--kids-accent);
+    }
+
+    .footer-about p {
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--kids-accent);
+      color: var(--primary);
+    }
+
+    .footer-links h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-links h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--kids-accent);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      opacity: 0.8;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      color: var(--kids-accent);
+      padding-left: 5px;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .collection-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .collection-image {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .kids-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Header -->
+  <header>
+    <div class="header-container container">
+      <div class="logo">Taj<span>Studio</span></div>
+      <nav>
+        <ul>
+          <li><a href="home-page.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="men.html">Men</a></li>
+          <li><a href="women.html">Women</a></li>
+          <li><a href="kids.html" class="active">Kids</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="kids-hero">
+    <div class="kids-hero-content">
+      <h1>Kids Collection</h1>
+      <p>Discover adorable and comfortable kids' fashion that blends style with functionality. Perfect for every occasion and adventure.</p>
+      <a href="#collection" class="btn">Explore Collection</a>
+    </div>
+  </section>
+
+  <!-- Kids Collection -->
+  <section class="container" id="collection">
+    <h2 class="section-title">Kids Fashion</h2>
+    
+    <div class="categories-filter">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Boys</button>
+      <button class="filter-btn">Girls</button>
+      <button class="filter-btn">Infants</button>
+      <button class="filter-btn">Accessories</button>
+    </div>
+    
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-badge">New</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Colorful Kids T-shirt">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Colorful Kids T-shirt</h3>
+          <p class="product-price">$24.99 <span class="original-price">$29.99</span></p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-badge">Sale</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1598808503746-f34cfb6c2524?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Denim Jacket for Boys">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Denim Jacket for Boys</h3>
+          <p class="product-price">$39.99</p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Floral Dress for Girls">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Floral Dress for Girls</h3>
+          <p class="product-price">$34.99</p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="product-badge">Limited</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cotton Onesies for Infants">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Cotton Onesies for Infants</h3>
+          <p class="product-price">$19.99 <span class="original-price">$24.99</span></p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Playful Hoodie Set">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Playful Hoodie Set</h3>
+          <p class="product-price">$29.99</p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card">
+        <div class="product-badge">New</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Designer Jeans">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Designer Jeans</h3>
+          <p class="product-price">$27.99</p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Summer Romper">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Summer Romper</h3>
+          <p class="product-price">$22.99</p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product-card">
+        <div class="product-badge">Popular</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1604917018611-5b4e1a24e1a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Adventure Backpack">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Adventure Backpack</h3>
+          <p class="product-price">$35.99</p>
+          <div class="product-actions">
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="wishlist"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Collection -->
+  <section class="featured-collection">
+    <div class="container">
+      <div class="collection-content">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1598808503746-f34cfb6c2524?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Kids Adventure Collection">
+        </div>
+        <div class="collection-details">
+          <h2>Kids Adventure Collection</h2>
+          <p>Designed for little explorers, our Adventure Collection combines durability with playful designs. Perfect for playdates, school, and family outings.</p>
+          <p>Made from soft, breathable fabrics that move with your child, these pieces are built for comfort and freedom of movement while maintaining their vibrant colors wash after wash.</p>
+          <a href="#" class="btn">Discover the Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Icon -->
+  <div class="cart-icon" onclick="viewCart()">
+    <i class="fas fa-shopping-bag"></i>
+    <span class="cart-count" id="cart-count">0</span>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-about">
+          <div class="footer-logo">Taj<span>Studio</span></div>
+          <p>Creating joyful fashion for kids that blends comfort, style and imagination since 2010.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Kids Collections</h3>
+          <ul>
+            <li><a href="#">Boys Clothing</a></li>
+            <li><a href="#">Girls Clothing</a></li>
+            <li><a href="#">Infant Wear</a></li>
+            <li><a href="#">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion St, Karachi, Pakistan</li>
+            <li><i class="fas fa-phone"></i> +92 318 8958825</li>
+            <li><i class="fas fa-envelope"></i> info@tajstudio.com</li>
+            <li><i class="fas fa-clock"></i> Mon-Sat: 10AM - 8PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 Taj Studio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Cart functionality
+    let cart = [];
+    const cartCount = document.getElementById('cart-count');
+    
+    // Add to cart buttons
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const productCard = this.closest('.product-card');
+        const productName = productCard.querySelector('.product-title').textContent;
+        const productPrice = productCard.querySelector('.product-price').textContent;
+        
+        cart.push({
+          name: productName,
+          price: productPrice.replace('$', '').split(' ')[0] // Get first price if multiple
+        });
+        
+        updateCartCount();
+        showAddedToCart(productName);
+      });
+    });
+    
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+      cartCount.style.display = cart.length ? 'flex' : 'none';
+    }
+    
+    function showAddedToCart(productName) {
+      alert(`${productName} has been added to your cart!`);
+    }
+    
+    function viewCart() {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      
+      let summary = 'Your Cart:\n\n';
+      let total = 0;
+      
+      cart.forEach((item, index) => {
+        summary += `${index + 1}. ${item.name} - $${item.price}\n`;
+        total += parseFloat(item.price);
+      });
+      
+      summary += `\nTotal: $${total.toFixed(2)}`;
+      
+      alert(summary);
+    }
+    
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+        // In a real implementation, you would filter products here
+      });
+    });
+    
+    // Initialize cart count display
+    updateCartCount();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1252 @@
+faqs.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Policies - Taj Studio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Modern CSS Variables */
+    :root {
+      --primary: #2a2a2a;
+      --secondary: #f8f8f8;
+      --accent: #e8c07d;
+      --text: #333;
+      --light-text: #777;
+      --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+      --section-padding: 5rem 0;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* Modern Header */
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1.5rem 5%;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    /* Modern Navigation */
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Policy Hero Section */
+    .policy-hero {
+      height: 50vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                  url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .policy-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .policy-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      letter-spacing: 2px;
+    }
+
+    .policy-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Tab Navigation */
+    .policy-tabs {
+      display: flex;
+      justify-content: center;
+      margin: 3rem 0 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .policy-tab {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--primary);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+
+    .policy-tab.active {
+      background-color: var(--accent);
+      color: var(--primary);
+    }
+
+    .policy-tab:hover:not(.active) {
+      background-color: rgba(232, 192, 125, 0.2);
+    }
+
+    /* Policy Content */
+    .policy-content {
+      padding: 3rem 0 5rem;
+    }
+
+    .policy-section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .policy-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .policy-title {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .policy-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent);
+    }
+
+    .policy-subtitle {
+      font-size: 1.4rem;
+      margin: 2rem 0 1rem;
+      color: var(--accent);
+    }
+
+    .policy-text {
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .policy-list {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .policy-list li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .policy-list li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+    }
+
+    .policy-note {
+      background-color: rgba(232, 192, 125, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+
+    .policy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      box-shadow: var(--shadow);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+
+    .policy-table th {
+      background-color: var(--accent);
+      color: var(--primary);
+      text-align: left;
+      padding: 1rem;
+      font-weight: 600;
+    }
+
+    .policy-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .policy-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .policy-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .faq-question {
+      background-color: var(--secondary);
+      padding: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 1.5rem;
+      max-height: 500px;
+    }
+
+    .faq-question i {
+      transition: var(--transition);
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    /* Contact Box */
+    .contact-box {
+      background: linear-gradient(135deg, var(--accent), #d9aa62);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      color: var(--primary);
+      margin: 3rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-item i {
+      font-size: 1.5rem;
+    }
+
+    /* Size Guide Styles */
+    .size-category-tabs {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .size-category-tab {
+      padding: 0.8rem 1.5rem;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .size-category-tab.active {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    .size-category-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .size-category-section.active {
+      display: block;
+    }
+
+    .size-table-container {
+      overflow-x: auto;
+    }
+
+    .size-table {
+      width: 100%;
+      min-width: 600px;
+      margin: 1.5rem 0;
+    }
+
+    .size-table th {
+      background-color: var(--accent);
+      color: var(--primary);
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+    }
+
+    .size-table td {
+      padding: 0.8rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .size-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .size-table tr:hover {
+      background-color: rgba(232, 192, 125, 0.1);
+    }
+
+    .measurement-guide {
+      background-color: rgba(232, 192, 125, 0.05);
+      border: 1px solid rgba(232, 192, 125, 0.3);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin: 2rem 0;
+    }
+
+    .measurement-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .measurement-step {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .measurement-step h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .measurement-step i {
+      background: var(--accent);
+      color: var(--primary);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 4rem 5%;
+      margin-top: 5rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer-about p {
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--accent);
+      color: var(--primary);
+    }
+
+    .footer-links h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-links h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      opacity: 0.8;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      color: var(--accent);
+      padding-left: 5px;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .policy-hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .policy-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .policy-hero {
+        height: 40vh;
+      }
+
+      .policy-hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .policy-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .policy-tab {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .measurement-steps {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Header -->
+  <header>
+    <div class="header-container container">
+      <div class="logo">Taj<span>Studio</span></div>
+      <nav>
+        <ul>
+          <li><a href="home-page.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="men.html">Men</a></li>
+          <li><a href="women.html">Women</a></li>
+          <li><a href="kids.html">Kids</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Policy Hero Section -->
+  <section class="policy-hero">
+    <div class="policy-hero-content">
+      <h1>Our Policies</h1>
+      <p>Transparent and customer-focused policies designed for your peace of mind</p>
+    </div>
+  </section>
+
+  <!-- Policy Tabs -->
+  <div class="container">
+    <div class="policy-tabs">
+      <button class="policy-tab" data-tab="return">Return Policy</button>
+      <button class="policy-tab" data-tab="shipping">Shipping Policy</button>
+      <button class="policy-tab active" data-tab="size">Size Guide</button>
+    </div>
+  </div>
+
+  <!-- Policy Content -->
+  <div class="container">
+    <div class="policy-content">
+      <!-- Return Policy Section -->
+      <section class="policy-section" id="return-policy">
+        <!-- Return policy content remains the same -->
+      </section>
+      
+      <!-- Shipping Policy Section -->
+      <section class="policy-section" id="shipping-policy">
+        <!-- Shipping policy content remains the same -->
+      </section>
+      
+      <!-- Size Guide Section -->
+      <section class="policy-section active" id="size-policy">
+        <h2 class="policy-title">Size Guide</h2>
+        
+        <p class="policy-text">Finding the perfect fit is essential for both comfort and style. Our comprehensive size guide will help you determine the best size for your Taj Studio garments. Below you'll find detailed measurements and instructions to ensure you select the right size every time.</p>
+        
+        <div class="policy-note">
+          <p><strong>Important:</strong> All measurements are in centimeters (cm). For the most accurate fit, please measure yourself while wearing undergarments similar to what you'll wear with the garment.</p>
+        </div>
+        
+        <h3 class="policy-subtitle">Select a Category</h3>
+        <div class="size-category-tabs">
+          <button class="size-category-tab active" data-category="men">Men</button>
+          <button class="size-category-tab" data-category="women">Women</button>
+          <button class="size-category-tab" data-category="kids">Kids</button>
+        </div>
+        
+        <!-- Men's Size Guide -->
+        <div class="size-category-section active" id="men-size">
+          <h3 class="policy-subtitle">Men's Clothing Sizes</h3>
+          
+          <div class="size-table-container">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Chest (cm)</th>
+                  <th>Waist (cm)</th>
+                  <th>Hip (cm)</th>
+                  <th>Shirt Length (cm)</th>
+                  <th>Inseam (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>XS</td>
+                  <td>86-91</td>
+                  <td>71-76</td>
+                  <td>86-91</td>
+                  <td>69</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>S</td>
+                  <td>91-97</td>
+                  <td>76-81</td>
+                  <td>91-97</td>
+                  <td>71</td>
+                  <td>78</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>97-102</td>
+                  <td>81-87</td>
+                  <td>97-102</td>
+                  <td>73</td>
+                  <td>80</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>102-107</td>
+                  <td>87-92</td>
+                  <td>102-107</td>
+                  <td>75</td>
+                  <td>82</td>
+                </tr>
+                <tr>
+                  <td>XL</td>
+                  <td>107-112</td>
+                  <td>92-97</td>
+                  <td>107-112</td>
+                  <td>77</td>
+                  <td>84</td>
+                </tr>
+                <tr>
+                  <td>XXL</td>
+                  <td>112-117</td>
+                  <td>97-102</td>
+                  <td>112-117</td>
+                  <td>79</td>
+                  <td>86</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <h3 class="policy-subtitle">Men's Footwear Sizes</h3>
+          
+          <div class="size-table-container">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>US Size</th>
+                  <th>UK Size</th>
+                  <th>EU Size</th>
+                  <th>Foot Length (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>7</td>
+                  <td>6</td>
+                  <td>40</td>
+                  <td>25.4</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>7</td>
+                  <td>41</td>
+                  <td>26.0</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>8</td>
+                  <td>42</td>
+                  <td>26.7</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>9</td>
+                  <td>43</td>
+                  <td>27.3</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>10</td>
+                  <td>44</td>
+                  <td>28.0</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>11</td>
+                  <td>45</td>
+                  <td>28.7</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Women's Size Guide -->
+        <div class="size-category-section" id="women-size">
+          <h3 class="policy-subtitle">Women's Clothing Sizes</h3>
+          
+          <div class="size-table-container">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Bust (cm)</th>
+                  <th>Waist (cm)</th>
+                  <th>Hip (cm)</th>
+                  <th>Dress Length (cm)</th>
+                  <th>Inseam (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>XS</td>
+                  <td>78-82</td>
+                  <td>61-64</td>
+                  <td>86-89</td>
+                  <td>92</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <td>S</td>
+                  <td>82-86</td>
+                  <td>64-68</td>
+                  <td>89-93</td>
+                  <td>94</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>86-91</td>
+                  <td>68-73</td>
+                  <td>93-97</td>
+                  <td>96</td>
+                  <td>78</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>91-97</td>
+                  <td>73-79</td>
+                  <td>97-102</td>
+                  <td>98</td>
+                  <td>80</td>
+                </tr>
+                <tr>
+                  <td>XL</td>
+                  <td>97-102</td>
+                  <td>79-84</td>
+                  <td>102-107</td>
+                  <td>100</td>
+                  <td>82</td>
+                </tr>
+                <tr>
+                  <td>XXL</td>
+                  <td>102-107</td>
+                  <td>84-89</td>
+                  <td>107-112</td>
+                  <td>102</td>
+                  <td>84</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <h3 class="policy-subtitle">Women's Footwear Sizes</h3>
+          
+          <div class="size-table-container">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>US Size</th>
+                  <th>UK Size</th>
+                  <th>EU Size</th>
+                  <th>Foot Length (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>5</td>
+                  <td>3</td>
+                  <td>35</td>
+                  <td>22.1</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>4</td>
+                  <td>36</td>
+                  <td>22.9</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>5</td>
+                  <td>37</td>
+                  <td>23.5</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>6</td>
+                  <td>38</td>
+                  <td>24.1</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>7</td>
+                  <td>39</td>
+                  <td>24.8</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>8</td>
+                  <td>40</td>
+                  <td>25.4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Kids Size Guide -->
+        <div class="size-category-section" id="kids-size">
+          <h3 class="policy-subtitle">Kids Clothing Sizes (2-12 Years)</h3>
+          
+          <div class="size-table-container">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>Age</th>
+                  <th>Height (cm)</th>
+                  <th>Chest/Bust (cm)</th>
+                  <th>Waist (cm)</th>
+                  <th>Hip (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2-3Y</td>
+                  <td>92-98</td>
+                  <td>56</td>
+                  <td>53</td>
+                  <td>59</td>
+                </tr>
+                <tr>
+                  <td>3-4Y</td>
+                  <td>98-104</td>
+                  <td>58</td>
+                  <td>54</td>
+                  <td>62</td>
+                </tr>
+                <tr>
+                  <td>4-5Y</td>
+                  <td>104-110</td>
+                  <td>60</td>
+                  <td>55</td>
+                  <td>64</td>
+                </tr>
+                <tr>
+                  <td>5-6Y</td>
+                  <td>110-116</td>
+                  <td>62</td>
+                  <td>56</td>
+                  <td>67</td>
+                </tr>
+                <tr>
+                  <td>6-8Y</td>
+                  <td>116-128</td>
+                  <td>64</td>
+                  <td>58</td>
+                  <td>70</td>
+                </tr>
+                <tr>
+                  <td>8-10Y</td>
+                  <td>128-140</td>
+                  <td>68</td>
+                  <td>61</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <td>10-12Y</td>
+                  <td>140-152</td>
+                  <td>72</td>
+                  <td>64</td>
+                  <td>79</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <h3 class="policy-subtitle">Kids Footwear Sizes</h3>
+          
+          <div class="size-table-container">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>Age</th>
+                  <th>US Size</th>
+                  <th>EU Size</th>
+                  <th>Foot Length (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2-3Y</td>
+                  <td>7-9</td>
+                  <td>23-25</td>
+                  <td>14.3-15.2</td>
+                </tr>
+                <tr>
+                  <td>3-4Y</td>
+                  <td>9-11</td>
+                  <td>25-27</td>
+                  <td>15.2-16.2</td>
+                </tr>
+                <tr>
+                  <td>4-5Y</td>
+                  <td>11-12</td>
+                  <td>27-28</td>
+                  <td>16.2-16.8</td>
+                </tr>
+                <tr>
+                  <td>5-6Y</td>
+                  <td>12-13</td>
+                  <td>28-29</td>
+                  <td>16.8-17.5</td>
+                </tr>
+                <tr>
+                  <td>6-8Y</td>
+                  <td>13-1</td>
+                  <td>30-32</td>
+                  <td>18.1-19.4</td>
+                </tr>
+                <tr>
+                  <td>8-10Y</td>
+                  <td>2-3</td>
+                  <td>33-35</td>
+                  <td>19.7-21.0</td>
+                </tr>
+                <tr>
+                  <td>10-12Y</td>
+                  <td>4-5</td>
+                  <td>36-37</td>
+                  <td>21.6-22.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <h3 class="policy-subtitle">How to Measure Yourself</h3>
+        
+        <div class="measurement-guide">
+          <p>For the best fit, follow these measurement guidelines:</p>
+          
+          <div class="measurement-steps">
+            <div class="measurement-step">
+              <h4><i class="fas fa-ruler"></i> Chest/Bust</h4>
+              <p>Measure around the fullest part of your chest/bust, keeping the tape measure horizontal and snug but not tight.</p>
+            </div>
+            
+            <div class="measurement-step">
+              <h4><i class="fas fa-ruler"></i> Waist</h4>
+              <p>Measure around the narrowest part of your natural waist, usually just above the belly button.</p>
+            </div>
+            
+            <div class="measurement-step">
+              <h4><i class="fas fa-ruler"></i> Hips</h4>
+              <p>Measure around the fullest part of your hips, about 20cm below your natural waist.</p>
+            </div>
+            
+            <div class="measurement-step">
+              <h4><i class="fas fa-ruler"></i> Inseam</h4>
+              <p>Measure from the top of your inner thigh down to the bottom of your ankle.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-section">
+          <h3 class="policy-subtitle">Size Guide FAQs</h3>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              What if I'm between sizes? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>If your measurements fall between two sizes, we recommend selecting the larger size for a more comfortable fit, especially for tops and outerwear. For tailored items like pants or dresses, you may prefer the smaller size.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              Do Taj Studio sizes run true to size? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Our garments are designed to be true to standard sizing. However, some styles may have a relaxed or slim fit. Always check the specific product description for fit notes. If you have any doubts, our customer service team can advise on specific items.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              How do I measure my child? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>For children, measure their height while standing straight without shoes. For chest and waist, measure while they're wearing light clothing. If your child is between sizes, choose based on their height rather than age, as children grow at different rates.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I exchange for a different size? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, we offer free size exchanges within 30 days of purchase. Please see our <a href="#" class="size-exchange-link">Return Policy</a> for complete details on how to exchange items for a different size.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-box">
+          <h3>Need Sizing Assistance?</h3>
+          <p>Our style consultants are available to help you find your perfect fit.</p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong>
+                <p>sizing@tajstudio.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <strong>Phone</strong>
+                <p>+92 318 8958825</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-comments"></i>
+              <div>
+                <strong>Live Chat</strong>
+                <p>Available Mon-Sat: 9AM-6PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-about">
+          <div class="footer-logo">Taj<span>Studio</span></div>
+          <p>Elevating fashion with a blend of traditional elegance and modern design since 2015.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="#" class="active">Size Guide</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion St, Karachi, Pakistan</li>
+            <li><i class="fas fa-phone"></i> +92 318 8958825</li>
+            <li><i class="fas fa-envelope"></i> info@tajstudio.com</li>
+            <li><i class="fas fa-clock"></i> Mon-Sat: 10AM - 8PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 Taj Studio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab functionality
+    const tabs = document.querySelectorAll('.policy-tab');
+    const sections = document.querySelectorAll('.policy-section');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs and sections
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Show corresponding section
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(`${tabId}-policy`).classList.add('active');
+      });
+    });
+    
+    // FAQ accordion functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      
+      question.addEventListener('click', () => {
+        // Close all other items
+        faqItems.forEach(faq => {
+          if (faq !== item) {
+            faq.classList.remove('active');
+          }
+        });
+        
+        // Toggle current item
+        item.classList.toggle('active');
+      });
+    });
+    
+    // Size category tabs
+    const sizeTabs = document.querySelectorAll('.size-category-tab');
+    const sizeSections = document.querySelectorAll('.size-category-section');
+    
+    sizeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs and sections
+        sizeTabs.forEach(t => t.classList.remove('active'));
+        sizeSections.forEach(s => s.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Show corresponding section
+        const categoryId = tab.getAttribute('data-category');
+        document.getElementById(`${categoryId}-size`).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
